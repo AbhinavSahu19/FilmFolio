@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">FilmFolio</string>
+    <string name="not_signed_in">You are not signed in</string>
+    <string name="no_item_found">No item found, start adding...</string>
+    <string name="credits">This product uses the TMDb API but is not endorsed or certified by TMDb</string>
+    <string name="sign_in_page">Sign in to explore </string>
+    <string name="about">
+       Welcome to FilmFolio, your ultimate destination for discovering and managing movies and TV shows!
+        \nOur app harnesses the power of the TMDB API to bring you the latest and greatest in entertainment.
+        \nWith FilmFolio, you can easily browse trending movies and shows, explore detailed information, and create personalized lists to keep track of your favorites and what to watch next.
+    </string>
+    <string name="network_error_msg">
+        Unable to resolve host \"api.themoviedb.org\": No address associated with hostname
+    </string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_width">75.dp</dimen>
+    <dimen name="small_height">110.dp</dimen>
+
+    <dimen name="mid_width">113.dp</dimen>
+    <dimen name="mid_height">166.dp</dimen>
+
+    <dimen name="large_width">186.dp</dimen>
+    <dimen name="large_height">276.dp</dimen>
+
+    <dimen name="extra_large_width">286.dp</dimen>
+    <dimen name="extra_large_height">426.dp</dimen>
+
+    <dimen name="detail_image_width">236.dp</dimen>
+    <dimen name="detail_image_height">354.dp</dimen>
+
+    <dimen name="backdrop_mid_width">196.dp</dimen>
+    <dimen name="backdrop_mid_height">143.dp</dimen>
+
+    <dimen name="episode_mid_width">166.dp</dimen>
+    <dimen name="episode_mid_height">102.dp</dimen>
+
+</resources>
