@@ -17,3 +17,9 @@ This app provides feature to sign in with google.
 You can explore trending, popular and top rated movies and series.
 You can create lists and save items in that list.
 You can search and get results in movies, series and persons.
+
+
+
+
+https://github.com/user-attachments/assets/a81a0c11-0e9e-4e76-a291-72ed32e51859
+
