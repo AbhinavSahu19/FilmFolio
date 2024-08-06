@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
@@ -60,10 +62,12 @@ fun SettingScreen(
         isAuthenticated.value = Firebase.auth.currentUser != null
         if(isAuthenticated.value)userId.value = Firebase.auth.currentUser!!.uid
     }
-    Scaffold {
+    Scaffold {contentPadding->
         Column(
             modifier = Modifier
+                .padding(0.dp, 0.dp, 0.dp, bottom =75.dp )
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .background(colorResource(id = R.color.bg_gray))
         ) {
             Card (

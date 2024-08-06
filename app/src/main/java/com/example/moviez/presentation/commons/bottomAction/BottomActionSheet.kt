@@ -95,25 +95,14 @@ fun BottomActionSheet(
     }
     LaunchedEffect(isInternetAvailable(context)) {
         isSignedIn = Firebase.auth.currentUser != null
-        if(isSignedIn){
+        if (isSignedIn) {
             userId = Firebase.auth.currentUser!!.uid
-//            if(!lists.contains("To Watch") && !lists.contains("Favourites")){
-//            }
             bottomActionViewModel.getLists(userId)
         }
     }
-    LaunchedEffect(addListStatus) {
-        when(addListStatus){
-            is ResponseModel.Error -> {
-                showToast(context, (addListStatus as ResponseModel.Error).errorMsg, Toast.LENGTH_LONG)
-            }
-            ResponseModel.Loading -> {}
-            is ResponseModel.Success -> {
-                showToast(context, "List added Successfully", Toast.LENGTH_SHORT)
-            }
-        }
-    }
-    ModalBottomSheet(onDismissRequest = {onDismiss()},
+
+    ModalBottomSheet(
+        onDismissRequest = { onDismiss() },
         sheetState = sheetState,
         containerColor = colorResource(id = R.color.bg_gray),
         dragHandle = { BottomSheetDefaults.DragHandle() },
@@ -203,9 +192,27 @@ fun BottomActionSheet(
         }
     }
     if(isDialogOpen){
-        AddListDialog(onDismiss = { isDialogOpen = false },
-            onAdd = { bottomActionViewModel.addList(userId, it)},
-            lists)
+        AddListDialog(
+            onDismiss = { isDialogOpen = false },
+            onAdd = {
+                bottomActionViewModel.addList(userId, it)
+                when (addListStatus) {
+                    is ResponseModel.Error -> {
+                        showToast(
+                            context,
+                            (addListStatus as ResponseModel.Error).errorMsg,
+                            Toast.LENGTH_LONG
+                        )
+                    }
+
+                    ResponseModel.Loading -> {}
+                    is ResponseModel.Success -> {
+                        showToast(context, "List added Successfully", Toast.LENGTH_SHORT)
+                    }
+                }
+            },
+            lists
+        )
     }
 
 }

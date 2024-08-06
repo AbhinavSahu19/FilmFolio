@@ -59,7 +59,7 @@ fun SearchKeywordDisplay(
     ) {
         items(Math.min(searchKeyword.size, 10)) { index ->
             val keyword = searchKeyword[index]
-            keywordString = keyword.name
+
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -68,6 +68,7 @@ fun SearchKeywordDisplay(
                         onClick = { onEnter(keyword.name) },
                         onLongClick = {
                             if (isSaved) isDialogOpen = true
+                            keywordString = keyword.name
                         }
                     ),
                 contentColor = colorResource(id = R.color.white),

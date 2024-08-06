@@ -63,7 +63,7 @@ class BottomActionViewModel @Inject constructor(
                 }
             }
         }
-        getLists(userId)
+//        getLists(userId)
     }
 
     fun addItem(userId: String, listName: String, item: StorageItem) {
@@ -71,9 +71,9 @@ class BottomActionViewModel @Inject constructor(
             repo.addItem(userId, listName, item).collect { response ->
                 withContext(Dispatchers.Main) {
                     _addItemStatus.value = response
-                    if (response is ResponseModel.Success) {
-                        containsItem(userId, listName, item)
-                    }
+//                    if (response is ResponseModel.Success) {
+//                        containsItem(userId, listName, item)
+//                    }
                 }
             }
         }
@@ -84,17 +84,14 @@ class BottomActionViewModel @Inject constructor(
             repo.deleteItem(userId, listName, item).collect { response ->
                 withContext(Dispatchers.Main) {
                     _deleteItemStatus.value = response
-                    if (response is ResponseModel.Success) {
-                        containsItem(userId, listName, item)
-                    }
+//                    if (response is ResponseModel.Success) {
+//                        containsItem(userId, listName, item)
+//                    }
                 }
             }
         }
     }
 
-    fun resetAddListStatus(){
-        _addListStatus.value = ResponseModel.Loading
-    }
     // Add reset methods for the statuses
     fun resetAddItemStatus() {
         _addItemStatus.value = ResponseModel.Error("Not Started")

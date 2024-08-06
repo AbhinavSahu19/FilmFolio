@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moviez.R
+import com.example.moviez.presentation.commons.formatDateString
 import com.example.moviez.presentation.commons.getAge
 import com.example.moviez.presentation.commons.getGender
 import com.example.moviez.presentation.commons.toSingleDecimal
@@ -99,7 +100,7 @@ fun PersonSideDetails(
                 }
             }
         }
-              Card(
+        Card(
             colors = CardDefaults.cardColors(
                 containerColor = colorResource(id = R.color.white)
             ),
@@ -116,7 +117,7 @@ fun PersonSideDetails(
                 )
                 Text(
                     text = if(birthDate == null)"--"
-                    else birthDate,
+                    else formatDateString(birthDate),
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Medium,
                 )
@@ -139,7 +140,7 @@ fun PersonSideDetails(
                         fontSize = 16.sp,
                     )
                     Text(
-                        text = deathDate,
+                        text = formatDateString(deathDate),
                         fontSize = 17.sp,
                         fontWeight = FontWeight.Medium,
                     )

@@ -35,8 +35,8 @@ fun PersonDetailsScreen(
         }
         is ResponseModel.Success -> {
             PersonDetailSuccess(personDetails = (personDetailResponse as ResponseModel.Success<PersonDetails>).data,
-                navigateToMovieDetails,
-                navigateToSeriesDetails)
+                navigateToSeriesDetails,
+                navigateToMovieDetails)
         }
     }
 }
