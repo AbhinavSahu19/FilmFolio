@@ -34,6 +34,18 @@ fun SeriesSideDetails(
         Modifier
             .padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 7.dp),
     ) {
+        SeriesSideRating(rating = rating)
+        SeriesSideFirstAir(firstAir = firstAir)
+        SeriesSideStatus(status = status)
+        SeriesSideType(type = type)
+        SeriesSideSeasonsEpisodes(seasons = seasons, episodes = episodes)
+        SeriesSideAdult(adult = adult)
+    }
+}
+
+@Composable
+fun SeriesSideAdult(adult: Boolean) {
+    if(adult){
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = colorResource(id = R.color.white)
@@ -46,138 +58,156 @@ fun SeriesSideDetails(
                 modifier = Modifier.padding(10.dp, 5.dp)
 
             ) {
-                Text(
-                    text = "Rating",
-                    fontSize = 16.sp,
-                )
-                Text(
-                    text = if(rating != 0.0)toSingleDecimal(rating) + "/10" else "--",
+                Text(text = "Adult",
                     fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
-
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 5.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(10.dp, 5.dp)
-
-            ) {
-                Text(
-                    text = "First Air On",
-                    fontSize = 16.sp,
-                )
-                Text(
-                    text = formatDateString(firstAir),
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
+                    fontWeight = FontWeight.Medium,)
             }
         }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 5.dp)
-        ) {
-            val pad = if(status=="Returning Series")3.dp else 10.dp
-            val txt = if(status=="Returning Series")15.sp else 17.sp
-            val txt2 = if(status=="Returning Series")14.sp else 16.sp
-            Column(
-                modifier = Modifier.padding(pad, 5.dp)
+    }
+}
 
-            ) {
-                Text(
-                    text = "Status",
-                    fontSize = txt2,
-                )
-                Text(
-                    text = status,
-                    fontSize = txt,
-                    fontWeight = FontWeight.Medium,
-                    maxLines = 1
-                )
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 5.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(10.dp, 5.dp)
-
-            ) {
-                Text(
-                    text = "Type",
-                    fontSize = 16.sp,
-                )
-                Text(
-                    text = type,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 5.dp)
+@Composable
+fun SeriesSideSeasonsEpisodes(seasons: Int, episodes: Int) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ){
+        Column (
+            modifier = Modifier.padding(10.dp, 5.dp)
         ){
-            Column (
-                modifier = Modifier.padding(10.dp, 5.dp)
-            ){
-                Text(text = "Seasons",
-                    fontSize = 16.sp,
-                )
-                Text(text =  seasons.toString(),
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-                HorizontalDivider()
-                Text(text = "Episodes",
-                    fontSize = 16.sp,
-                )
-                Text(text = episodes.toString(),
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
+            Text(text = "Seasons",
+                fontSize = 16.sp,
+            )
+            Text(text =  seasons.toString(),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+            Spacer(modifier = Modifier.height(2.dp))
+            HorizontalDivider()
+            Text(text = "Episodes",
+                fontSize = 16.sp,
+            )
+            Text(text = episodes.toString(),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
         }
-        if(adult){
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = colorResource(id = R.color.white)
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 5.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(10.dp, 5.dp)
+    }
+}
 
-                ) {
-                    Text(text = "Adult",
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Medium,)
-                }
-            }
+@Composable
+fun SeriesSideType(type: String) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+
+        ) {
+            Text(
+                text = "Type",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = type,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
         }
+    }
+}
+
+@Composable
+fun SeriesSideStatus(status: String) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        val pad = if(status=="Returning Series")3.dp else 10.dp
+        val txt = if(status=="Returning Series")15.sp else 17.sp
+        val txt2 = if(status=="Returning Series")14.sp else 16.sp
+        Column(
+            modifier = Modifier.padding(pad, 5.dp)
+
+        ) {
+            Text(
+                text = "Status",
+                fontSize = txt2,
+            )
+            Text(
+                text = status,
+                fontSize = txt,
+                fontWeight = FontWeight.Medium,
+                maxLines = 1
+            )
+        }
+    }
+}
+
+@Composable
+fun SeriesSideFirstAir(firstAir: String) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+
+        ) {
+            Text(
+                text = "First Air On",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = formatDateString(firstAir),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+    }
+}
+
+@Composable
+fun SeriesSideRating(rating: Double) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+
+        ) {
+            Text(
+                text = "Rating",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = if(rating != 0.0)toSingleDecimal(rating) + "/10" else "--",
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+
     }
 }

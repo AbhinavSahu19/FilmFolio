@@ -30,136 +30,162 @@ fun SeasonSideDetails(
 ){
     Column(
         Modifier
-            .padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 7.dp),){
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp)
+            .padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 7.dp),
+    ) {
+        SeasonSideNumber(seasonNumb = seasonNumb)
+        SeasonSideEpisodesNumber(episodes = episodes)
+        SeasonSideRating(rating = rating)
+        SeasonSideRuntime(runtime = runtime)
+        SeasonSideReleaseDate(releaseDate = releaseDate)
+    }
+}
+
+@Composable
+fun SeasonSideReleaseDate(releaseDate: String?) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
         ) {
+            Text(
+                text = "Release On",
+                fontSize = 16.sp,
+            )
+            Spacer(modifier = Modifier.height(1.dp))
+            Text(
+                text = formatDateString(releaseDate),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+    }
+}
+
+@Composable
+fun SeasonSideRuntime(runtime: Int) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+        ) {
+            Text(
+                text = "Runtime",
+                fontSize = 16.sp,
+            )
+            Spacer(modifier = Modifier.height(1.dp))
+            Text(
+                text = formatTime(runtime),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+    }
+}
+
+@Composable
+fun SeasonSideRating(rating: Double) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+        ) {
+            Text(
+                text = "Rating ",
+                fontSize = 16.sp,
+            )
+            Spacer(modifier = Modifier.height(1.dp))
+            Text(
+                text = if(rating!=0.0) toSingleDecimal(rating) + "/10" else "--",
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+    }
+}
+
+@Composable
+fun SeasonSideEpisodesNumber(episodes: Int) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 10.dp)
+    ) {
+        if(episodes >= 10){
+            Column(
+                modifier = Modifier.padding(10.dp, 5.dp)
+            ) {
+                Text(
+                    text = "Episodes :-  ",
+                    fontSize = 16.sp,
+                )
+                Text(
+                    text = episodes.toString(),
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Medium,
+                )
+            }
+        }
+        else{
             Row(
                 modifier = Modifier.padding(10.dp, 5.dp)
             ) {
                 Text(
-                    text = "Season :-  ",
+                    text = "Episodes :-  ",
                     fontSize = 16.sp,
                 )
                 Text(
-                    text = seasonNumb.toString(),
+                    text = episodes.toString(),
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Medium,
                 )
             }
         }
-        Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = colorResource(id = R.color.white)
-                ),
+    }
+}
+
+@Composable
+fun SeasonSideNumber(seasonNumb: Int) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 10.dp)
+    ) {
+        Row(
+            modifier = Modifier.padding(10.dp, 5.dp)
         ) {
-            if(episodes >= 10){
-                Column(
-                    modifier = Modifier.padding(10.dp, 5.dp)
-                ) {
-                    Text(
-                        text = "Episodes :-  ",
-                        fontSize = 16.sp,
-                    )
-                    Text(
-                        text = episodes.toString(),
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Medium,
-                    )
-                }
-            }
-            else{
-                Row(
-                    modifier = Modifier.padding(10.dp, 5.dp)
-                ) {
-                    Text(
-                        text = "Episodes :-  ",
-                        fontSize = 16.sp,
-                    )
-                    Text(
-                        text = episodes.toString(),
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Medium,
-                    )
-                }
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(10.dp, 5.dp)
-            ) {
-                Text(
-                    text = "Rating ",
-                    fontSize = 16.sp,
-                )
-                Spacer(modifier = Modifier.height(1.dp))
-                Text(
-                    text = if(rating!=0.0) toSingleDecimal(rating) + "/10" else "--",
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(10.dp, 5.dp)
-            ) {
-                Text(
-                    text = "Runtime",
-                    fontSize = 16.sp,
-                )
-                Spacer(modifier = Modifier.height(1.dp))
-                Text(
-                    text = formatTime(runtime),
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(10.dp, 5.dp)
-            ) {
-                Text(
-                    text = "Release On",
-                    fontSize = 16.sp,
-                )
-                Spacer(modifier = Modifier.height(1.dp))
-                Text(
-                    text = formatDateString(releaseDate),
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
+            Text(
+                text = "Season :-  ",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = seasonNumb.toString(),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
         }
     }
 }

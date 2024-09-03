@@ -1,6 +1,7 @@
 package com.example.moviez.presentation.movieDetails
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -46,7 +47,7 @@ fun MovieDetailScreen(
     when (movieDetailsResponse) {
         is ResponseModel.Error -> {
             ErrorScreen(errorMsg = (movieDetailsResponse as ResponseModel.Error).errorMsg,
-                onReload = { movieDetailViewModel.getMovieDetails() }
+                onReload =  movieDetailViewModel::getMovieDetails
             )
         }
 
@@ -112,8 +113,6 @@ fun MovieDetailsSuccessScreen(
                     genres = movieDetails.genres,
                     onGenreClick = navigateToMoviesWithGenre
                 )
-            }
-            item {
             }
             item {
                 DetailCastDisplay(credits = movieDetails.credits, onCastClick = navigateToPersonDetails)

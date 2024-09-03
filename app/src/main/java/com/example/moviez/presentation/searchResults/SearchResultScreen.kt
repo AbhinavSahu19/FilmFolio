@@ -5,13 +5,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material.Scaffold
-import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -19,9 +14,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.moviez.R
 import com.example.moviez.presentation.Error.ErrorScreen
@@ -31,7 +26,7 @@ import com.example.moviez.presentation.commons.GeneralTopBar
 import com.example.moviez.utils.ResponseModel
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SearchResultScreen(
     searchResultViewModel: SearchResultViewModel = hiltViewModel(),
@@ -50,16 +45,16 @@ fun SearchResultScreen(
     val movieResultResponse by searchResultViewModel.movieResultResponse.collectAsState()
     val seriesResultResponse by searchResultViewModel.seriesResultResponse.collectAsState()
     val personResultResponse by searchResultViewModel.personResultResponse.collectAsState()
-    val option = remember {
+    val option = rememberSaveable {
         mutableIntStateOf(0)
     }
-    val moviePageNo = remember {
+    val moviePageNo = rememberSaveable {
         mutableIntStateOf(1)
     }
-    val seriesPageNo = remember {
+    val seriesPageNo = rememberSaveable {
         mutableIntStateOf(1)
     }
-    val personPageNo = remember {
+    val personPageNo = rememberSaveable {
         mutableIntStateOf(1)
     }
     LaunchedEffect(option.intValue, moviePageNo.intValue) {

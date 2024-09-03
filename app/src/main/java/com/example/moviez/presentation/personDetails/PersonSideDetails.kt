@@ -17,7 +17,6 @@ import com.example.moviez.R
 import com.example.moviez.presentation.commons.formatDateString
 import com.example.moviez.presentation.commons.getAge
 import com.example.moviez.presentation.commons.getGender
-import com.example.moviez.presentation.commons.toSingleDecimal
 
 @Composable
 fun PersonSideDetails(
@@ -31,6 +30,18 @@ fun PersonSideDetails(
         Modifier
             .padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 7.dp),
     ) {
+        PersonSideDepartment(department = department)
+        PersonSideGender(gender = gender)
+        PersonSideAge(birthDate = birthDate, deathDate = deathDate)
+        PersonSideBirthDate(birthDate = birthDate)
+        PersonSideDeathDate(deathDate = deathDate)
+        PersonSideBirthPlace(birthPlace = birthPlace)
+    }
+}
+
+@Composable
+fun PersonSideBirthPlace(birthPlace: String?) {
+    if(birthPlace != null) {
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = colorResource(id = R.color.white)
@@ -43,16 +54,22 @@ fun PersonSideDetails(
                 modifier = Modifier.padding(10.dp, 5.dp)
             ) {
                 Text(
-                    text = "Department",
+                    text = "Place of birth:-",
                     fontSize = 16.sp,
                 )
                 Text(
-                    text = if(department == null)"--" else department,
+                    text = birthPlace,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Medium,
                 )
             }
         }
+    }
+}
+
+@Composable
+fun PersonSideDeathDate(deathDate: String?) {
+    if(deathDate != null) {
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = colorResource(id = R.color.white)
@@ -65,41 +82,49 @@ fun PersonSideDetails(
                 modifier = Modifier.padding(10.dp, 5.dp)
             ) {
                 Text(
-                    text = "Gender",
+                    text = "Death Date :-  ",
                     fontSize = 16.sp,
                 )
                 Text(
-                    text = getGender(gender),
+                    text = formatDateString(deathDate),
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Medium,
                 )
             }
         }
-        if(deathDate.isNullOrEmpty()){
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = colorResource(id = R.color.white)
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 5.dp)
-            ) {
-                Row(
-                    modifier = Modifier.padding(10.dp, 5.dp)
-                ) {
-                    Text(
-                        text = "Age :-  ",
-                        fontSize = 16.sp,
-                    )
-                    Text(
-                        text = if(birthDate == null)"--"
-                        else getAge(birthDate).toString(),
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Medium,
-                    )
-                }
-            }
+    }
+}
+
+@Composable
+fun PersonSideBirthDate(birthDate: String?) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+        ) {
+            Text(
+                text = "Birth Date :-  ",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = if(birthDate == null)"--"
+                else formatDateString(birthDate),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
         }
+    }
+}
+
+@Composable
+fun PersonSideAge(birthDate: String?, deathDate: String?) {
+    if(deathDate.isNullOrEmpty()){
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = colorResource(id = R.color.white)
@@ -108,68 +133,72 @@ fun PersonSideDetails(
                 .fillMaxWidth()
                 .padding(bottom = 5.dp)
         ) {
-            Column(
+            Row(
                 modifier = Modifier.padding(10.dp, 5.dp)
             ) {
                 Text(
-                    text = "Birth Date :-  ",
+                    text = "Age :-  ",
                     fontSize = 16.sp,
                 )
                 Text(
                     text = if(birthDate == null)"--"
-                    else formatDateString(birthDate),
+                    else getAge(birthDate).toString(),
                     fontSize = 17.sp,
                     fontWeight = FontWeight.Medium,
                 )
             }
         }
-        if(deathDate != null) {
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = colorResource(id = R.color.white)
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 5.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(10.dp, 5.dp)
-                ) {
-                    Text(
-                        text = "Death Date :-  ",
-                        fontSize = 16.sp,
-                    )
-                    Text(
-                        text = formatDateString(deathDate),
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Medium,
-                    )
-                }
-            }
+    }
+}
+
+@Composable
+fun PersonSideGender(gender: Int) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+        ) {
+            Text(
+                text = "Gender",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = getGender(gender),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
         }
-        if(birthPlace != null) {
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = colorResource(id = R.color.white)
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 5.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(10.dp, 5.dp)
-                ) {
-                    Text(
-                        text = "Place of birth:-",
-                        fontSize = 16.sp,
-                    )
-                    Text(
-                        text = birthPlace,
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Medium,
-                    )
-                }
-            }
+    }
+}
+
+@Composable
+fun PersonSideDepartment(department: String?) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+        ) {
+            Text(
+                text = "Department",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = if(department == null)"--" else department,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
         }
     }
 }

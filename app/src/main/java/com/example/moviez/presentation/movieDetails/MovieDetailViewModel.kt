@@ -1,20 +1,21 @@
 package com.example.moviez.presentation.movieDetails
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviez.dataModels.MovieDetails
 import com.example.moviez.navigation.NavigationDestination
-import com.example.moviez.repositary.realtimeDatabase.RealtimeDbRepository
+import com.example.moviez.network.DataCache
 import com.example.moviez.repositary.tmdb.TmdbRepository
 import com.example.moviez.utils.ResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 object MovieDetailsDestination: NavigationDestination {
@@ -39,7 +40,7 @@ class MovieDetailViewModel @Inject constructor(
 
     fun getMovieDetails() {
         viewModelScope.launch{
-            repo.getMovieDetails(movieId).collectLatest {
+            repo.getMovieDetails(movieId).collect {
                _movieDetails.value = it
             }
         }

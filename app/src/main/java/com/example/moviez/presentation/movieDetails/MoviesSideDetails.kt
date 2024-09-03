@@ -39,7 +39,8 @@ fun MoviesSideDetails(
 ){
     Column(
         Modifier
-            .padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 7.dp),){
+            .padding(start = 0.dp, top = 10.dp, end = 10.dp, bottom = 7.dp),
+        ){
 //        Card(
 //            colors = CardDefaults.cardColors(
 //                containerColor = colorResource(id = R.color.white)
@@ -56,6 +57,23 @@ fun MoviesSideDetails(
 //                fontWeight = FontWeight.Medium,
 //                modifier = Modifier.padding(start = 10.dp))
 //        }
+        MovieSideRating(rating = rating)
+        MovieSideRuntime(runtime = runtime)
+        MovieSideStatus(status = status)
+        MovieSideReleaseDate(releaseDate = releaseDate)
+        MovieSideRevenueBudget(
+            revenue = revenue,
+            budget = budget
+        )
+        MovieSideAdult(
+            adult = adult
+        )
+    }
+}
+
+@Composable
+fun MovieSideAdult(adult: Boolean) {
+    if(adult){
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = colorResource(id = R.color.white)
@@ -66,142 +84,162 @@ fun MoviesSideDetails(
         ) {
             Column(
                 modifier = Modifier.padding(10.dp, 5.dp)
+
             ) {
-                Text(
-                    text = "Ratings",
-                    fontSize = 16.sp,
-                )
-                Text(
-                    text = if(rating != 0.0)toSingleDecimal(rating) + "/10" else "--",
+                Text(text = "Adult",
                     fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
+                    fontWeight = FontWeight.Medium,)
+
+            }
+        }
+    }
+}
+
+@Composable
+fun MovieSideRevenueBudget(revenue: Long, budget: Long) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ){
+        val size = if(formatMoney(revenue).length>9)4.dp else 10.dp
+        Column (
+            modifier = Modifier.padding(size, 6.dp)
+        ){
+            Text(text = "Budget",
+                fontSize = 16.sp,
+            )
+            Text(text =  if(budget == 0L) "--" else "$${formatMoney(budget)}",
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+            Spacer(modifier = Modifier.height(2.dp))
+            HorizontalDivider()
+            Text(text = "Revenue",
+                fontSize = 16.sp,
+            )
+            Text(text = if(revenue == 0L) "--" else "$${formatMoney(revenue)}",
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+    }
+}
+
+@Composable
+fun MovieSideReleaseDate(releaseDate: String) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ){
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+
+        ) {
+            Text(
+                text = "Release Date",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = formatDateString(releaseDate),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+    }
+}
+
+@Composable
+fun MovieSideStatus(status: String) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ){
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+
+        ) {
+            Text(
+                text = "Status",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = status,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+    }
+}
+
+@Composable
+fun MovieSideRuntime(runtime: Int) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+
+        ) {
+            Text(
+                text = "Runtime",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = formatTime(runtime),
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
+        }
+
+    }
+}
+
+@Composable
+fun MovieSideRating(
+    rating: Double
+){
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.white)
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 5.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(10.dp, 5.dp)
+        ) {
+            Text(
+                text = "Ratings",
+                fontSize = 16.sp,
+            )
+            Text(
+                text = if(rating != 0.0)toSingleDecimal(rating) + "/10" else "--",
+                fontSize = 17.sp,
+                fontWeight = FontWeight.Medium,
+            )
 //                Text(
 //                    text = voteCount.toString(),
 //                    fontSize = 16.sp,
 //                    fontWeight = FontWeight.Medium,
 //                )
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 5.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(10.dp, 5.dp)
-
-            ) {
-                Text(
-                    text = "Runtime",
-                    fontSize = 16.sp,
-                )
-                Text(
-                    text = formatTime(runtime),
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
-
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 5.dp)
-        ){
-            Column(
-                modifier = Modifier.padding(10.dp, 5.dp)
-
-            ) {
-                Text(
-                    text = "Status",
-                    fontSize = 16.sp,
-                )
-                Text(
-                    text = status,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 5.dp)
-        ){
-            Column(
-                modifier = Modifier.padding(10.dp, 5.dp)
-
-            ) {
-                Text(
-                    text = "Release Date",
-                    fontSize = 16.sp,
-                )
-                Text(
-                    text = formatDateString(releaseDate),
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
-        }
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = colorResource(id = R.color.white)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 5.dp)
-        ){
-            val size = if(formatMoney(revenue).length>9)4.dp else 10.dp
-            Column (
-                modifier = Modifier.padding(size, 6.dp)
-            ){
-                Text(text = "Budget",
-                    fontSize = 16.sp,
-                )
-                Text(text =  if(budget == 0L) "--" else "$${formatMoney(budget)}",
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-                HorizontalDivider()
-                Text(text = "Revenue",
-                    fontSize = 16.sp,
-                )
-                Text(text = if(revenue == 0L) "--" else "$${formatMoney(revenue)}",
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Medium,
-                )
-            }
-        }
-        if(adult){
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = colorResource(id = R.color.white)
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 5.dp)
-            ) {
-                Column(
-                    modifier = Modifier.padding(10.dp, 5.dp)
-
-                ) {
-                    Text(text = "Adult",
-                        fontSize = 17.sp,
-                        fontWeight = FontWeight.Medium,)
-
-                }
-            }
         }
     }
 }
