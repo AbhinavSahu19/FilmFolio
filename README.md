@@ -12,14 +12,15 @@ Kotlin Coroutines.
 Firebaes authenticaiton.
 Firebase realtime database for storage of lists and search keywords
 
-Features:-
-This app provides feature to sign in with google.
-You can explore trending, popular and top rated movies and series.
-You can create lists and save items in that list.
-You can search and get results in movies, series and persons.
+Key Features:
+• Explore Popular Content: Browse trending, popular, and top-rated movies and TV series with ease.
+• Genre Discovery: Find movies and series by exploring different genres tailored to your preferences.
+• Personalized Lists: Create and manage your own lists, adding your favorite movies and shows with just a tap.
+• Real-Time Updates: View and update your lists instantly, thanks to real-time synchronization.
 
 
 
+https://github.com/user-attachments/assets/42e9bc9d-5e5d-4e4c-8470-3725337ead0d
 
-https://github.com/user-attachments/assets/a81a0c11-0e9e-4e76-a291-72ed32e51859
+
 
