@@ -5,6 +5,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -25,8 +26,6 @@ import com.example.moviez.presentation.commons.GeneralBottomBar
 import com.example.moviez.presentation.commons.GeneralTopBar
 import com.example.moviez.utils.ResponseModel
 
-@OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SearchResultScreen(
     searchResultViewModel: SearchResultViewModel = hiltViewModel(),
@@ -81,10 +80,11 @@ fun SearchResultScreen(
         bottomBar = {
             GeneralBottomBar()
         }
-    ) {
+    ) {contentPadding->
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(contentPadding)
                 .background(colorResource(id = R.color.bg_gray))
         ) {
             SearchResultUpperPart(
